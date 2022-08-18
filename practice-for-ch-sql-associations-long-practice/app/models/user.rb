@@ -22,6 +22,12 @@ class User < ApplicationRecord
         through: :enrollments,
         source: :course
 
+
+    has_many :courses_being_taught, #For instructors
+        primary_key: :instructor_id,
+        foreign_key: :id,
+        class_name: :Course        
+
     
 
 end

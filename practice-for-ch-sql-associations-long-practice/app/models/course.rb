@@ -11,13 +11,27 @@
 #
 class Course < ApplicationRecord
 
+    # validates :prereq_id, presence: true
+
     has_many :enrollments,
         primary_key: :id,
         foreign_key: :course_id,
         class_name: :Enrollment
 
-    has_many :students,
+    has_many :enrolled_students,
         through: :enrollments,
         source: :student
+
+    has_one :prereq,
+        primary_key: :prereq_id,
+        class_name: :Course,
+        foreign_key: :id
+
+    belongs_to :instructor,
+        primary_key: :id,
+        foreign_key: :instructor_id,
+        class_name: :User
+
+
 
 end
